@@ -1,5 +1,4 @@
 
-
 flowchart TD
     START([Start MyBot]) --> INPUT[User enters request]
 
@@ -32,7 +31,3 @@ flowchart TD
 
     EXEC_LLM --> FINAL
     FINAL --> INPUT
-
-
-
-
