@@ -37,43 +37,6 @@ MyBot separates **decision making** from **execution**:
 This mirrors production agent designs (AutoGPT, LangGraph, Devin-style agents).
 
 
-flowchart TD
-    START([Start MyBot]) --> INPUT[User enters request]
-
-    INPUT --> PLAN_LLM[Planner LLM]
-    PLAN_LLM --> PLAN_JSON{Valid JSON Plan?}
-
-    PLAN_JSON -->|No| PLAN_ERROR[Return planning error]
-    PLAN_JSON -->|Yes| SHOW_PLAN[Show plan to user]
-
-    SHOW_PLAN --> PLAN_APPROVAL{User approves plan?}
-    PLAN_APPROVAL -->|No| STOP_PLAN[Stop: Plan rejected]
-    PLAN_APPROVAL -->|Yes| EXEC_LLM[Executor LLM]
-
-    EXEC_LLM --> TOOL_CALL{Tool call requested?}
-
-    TOOL_CALL -->|No| FINAL[Return final response]
-
-    TOOL_CALL -->|Yes| TOOL_ALLOWED{Tool in tools_needed?}
-    TOOL_ALLOWED -->|No| BLOCKED[Blocked: Tool not approved]
-
-    TOOL_ALLOWED -->|Yes| TOOL_RISK{High-risk tool?}
-    TOOL_RISK -->|Yes| TOOL_APPROVAL{User approves tool?}
-    TOOL_RISK -->|No| RUN_TOOL[Run tool]
-
-    TOOL_APPROVAL -->|No| STOP_TOOL[Stop: Tool denied]
-    TOOL_APPROVAL -->|Yes| RUN_TOOL
-
-    RUN_TOOL --> TOOL_RESULT[Tool result]
-    TOOL_RESULT --> EXEC_LLM
-
-    EXEC_LLM --> FINAL
-    FINAL --> INPUT
-
-
-
-
-
 
 
 ---
@@ -144,6 +107,7 @@ cd mybot_final_clean
 
 pip install -e .
 playwright install chromium
+
 
 
 
