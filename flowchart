@@ -1,3 +1,4 @@
+Mermaid
 
 flowchart TD
     START([Start MyBot]) --> INPUT[User enters request]
